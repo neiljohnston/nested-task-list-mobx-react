@@ -15,17 +15,17 @@
  */
 
 const sampleTodosForDebug = [{
- id: 1,
+ id: -1,
  completed: false,
  text: 'Todo number 1'
 },
 {
- id: 2,
+ id: -2,
  completed: false,
  text: 'Todo number 2'
 },
 {
- id: 3,
+ id: -3,
  completed: false,
  text: 'Todo number 3'
 }];

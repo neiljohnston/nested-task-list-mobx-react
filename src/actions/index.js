@@ -43,6 +43,7 @@ export const toggleTodo = (id) => {
 }
 
 export const deleteTodo = (id) => {
+  console.log("DELETE_TODO action called with id: ", id);
   return {
     type: "DELETE_TODO",
     id

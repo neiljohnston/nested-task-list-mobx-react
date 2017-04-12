@@ -13,17 +13,18 @@
  * file 'LICENSE', which is part of this source code package.
  */
 
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import Todo from './Todo'
 
-const TodoList = ({ todos, onTodoClick, onTodoType }) => (
+const TodoList = ({ todos, onTodoClick, onTodoDelete }) => (
   <ul>
     {todos.map(todo =>
       <Todo
         key={todo.id}
         {...todo}
         onClick={() => onTodoClick(todo.id)}
+        onDelete={() => onTodoDelete(todo.id)}
       />
     )}
   </ul>
@@ -36,6 +37,7 @@ TodoList.propTypes = {
     text: PropTypes.string.isRequired
   }).isRequired).isRequired,
   onTodoClick: PropTypes.func.isRequired,
+  onTodoDelete: PropTypes.func.isRequired,
 }
 
 export default TodoList

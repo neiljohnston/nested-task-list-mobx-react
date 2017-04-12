@@ -16,7 +16,7 @@
 
 
 import { connect } from 'react-redux'
-import { toggleTodo } from '../actions'
+import { toggleTodo, deleteTodo } from '../actions'
 import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
@@ -27,6 +27,9 @@ const getVisibleTodos = (todos, filter) => {
       return todos.filter(t => t.completed)
     case 'SHOW_ACTIVE':
       return todos.filter(t => !t.completed)
+    default:
+      console.log("reached default case in getVisibleTodos. This should not happen...");
+      return todos;
   }
 }
 
@@ -40,10 +43,22 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
       dispatch(toggleTodo(id))
+    },
+
+    // This adds an onTodoDelete prop to TodoList
+    onTodoDelete: (id) => {
+      dispatch(deleteTodo(id))
     }
   }
 }
 
+/**
+  connect() here provides the store to mapStateToProps, and it provides
+  dispatch to mapDispatchToProps. This is so you can add props to a component
+  (TodoList in this case) that access the store or that make dispatch calls.
+  This is a scalable, but somewhat confusing way to add these props to
+  TodoList. The other way would be to use connect() as a decorator in TodoList.
+*/
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps

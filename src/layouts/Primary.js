@@ -11,28 +11,17 @@
 
 import React, { Component } from 'react';
 
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-import Dialog from 'material-ui/Dialog';
+// import Dialog from 'material-ui/Dialog';
 // import {deepOrange500} from 'material-ui/styles/colors';
-import FlatButton from 'material-ui/FlatButton';
+// import FlatButton from 'material-ui/FlatButton';
 // import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import TodoList from '../components/TodoList';
 import Footer from '../components/Footer';
 import AddTodo from '../containers/AddTodo';
 import VisibleTodoList from '../containers/VisibleTodoList';
-
-// export default class Primary extends Component {
-//   render() {
-//     return (
-//         <AppBar
-//           title="Task List JDH"
-//           iconClassNameRight="muidocs-icon-navigation-expand-more" />
-//     );
-//   }
-// }
 
 
 const styles = {
@@ -43,47 +32,18 @@ const styles = {
 };
 
 export default class Primary extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleRequestClose = this.handleRequestClose.bind(this);
-    this.handleTouchTap = this.handleTouchTap.bind(this);
-
-  }
-
-  handleRequestClose() {
-    this.setState({
-      open: false,
-    });
-  }
-
-  handleTouchTap() {
-    this.setState({
-      open: true,
-    });
-  }
 
   render() {
-    const standardActions = (
-      <FlatButton
-        label="Ok"
-        primary={true}
-        onTouchTap={this.handleRequestClose}
-      />
-    );
-
-
-
     return (
       <div style={styles.container}>
         <AppBar
           title="Hierarchical Todos"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
-          <VisibleTodoList />
-          <AddTodo />
-          <Footer />
-        </div>
+        <VisibleTodoList />
+        <AddTodo />
+        <Footer />
+      </div>
     );
   }
 }
