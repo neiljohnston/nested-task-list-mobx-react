@@ -16,16 +16,19 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Primary from './layouts/Primary';
-
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import todoApp from './reducers';
 
-let store = createStore(todoApp);
+import Primary from './layouts/Primary';
+import reducers from './reducers';
+import { deleteTodo } from './actions';  // for debugging
+
+let store = createStore(reducers);
+
+// Expose the store globally for debugging
+window.store = store;
+window.deleteTodo = deleteTodo;
 
 class App extends Component {
   render() {

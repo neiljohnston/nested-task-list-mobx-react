@@ -14,7 +14,24 @@
  * file 'LICENSE', which is part of this source code package.
  */
 
+const sampleTodosForDebug = [{
+ id: 1,
+ completed: false,
+ text: 'Todo number 1'
+},
+{
+ id: 2,
+ completed: false,
+ text: 'Todo number 2'
+},
+{
+ id: 3,
+ completed: false,
+ text: 'Todo number 3'
+}];
+
 const todo = (state = {}, action) => {
+  console.log(`todo reducer called. state: ${state} | action: ${action}`);
   switch (action.type) {
     case 'ADD_TODO':
       return {
@@ -36,7 +53,8 @@ const todo = (state = {}, action) => {
   }
 }
 
-const todos = (state = [], action) => {
+// Remove sampleTodosForDebug for production
+const todos = (state = sampleTodosForDebug, action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -46,6 +64,10 @@ const todos = (state = [], action) => {
     case 'TOGGLE_TODO':
       return state.map(t =>
         todo(t, action)
+      )
+    case 'DELETE_TODO':
+      return state.filter(t =>
+        t.id !== action.id
       )
     default:
       return state
