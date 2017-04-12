@@ -15,22 +15,26 @@
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import Primary from './layouts/Primary';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import todoApp from './reducers';
+
+let store = createStore(todoApp);
 
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
-        <Primary />
-      </MuiThemeProvider>
+      <Provider store={store}>
+        <MuiThemeProvider>
+          <Primary />
+        </MuiThemeProvider>
+      </Provider>
     );
   }
 }

@@ -1,0 +1,39 @@
+/**
+  Name: /src/actions/index.js
+
+  Description: Creates redux actions.
+
+  TODO:
+
+  This is a copy of/reworking of the redux example at http://redux.js.org/docs/basics/ExampleTodoList.html
+
+  Copyright (c) 2017-present Justin Haaheim
+
+  This file is subject to the terms and conditions defined in
+  file 'LICENSE', which is part of this source code package.
+
+***** */
+
+
+let nextTodoId = 0
+export const addTodo = (text) => {
+ return {
+   type: 'ADD_TODO',
+   id: nextTodoId++,
+   text
+ }
+}
+
+export const setVisibilityFilter = (filter) => {
+ return {
+   type: 'SET_VISIBILITY_FILTER',
+   filter
+ }
+}
+
+export const toggleTodo = (id) => {
+ return {
+   type: 'TOGGLE_TODO',
+   id
+ }
+}
