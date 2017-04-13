@@ -16,7 +16,7 @@
 
 
 import { connect } from 'react-redux'
-import { toggleTodo, deleteTodo, updateTodo } from '../actions'
+import { toggleTodo, deleteTodo, updateTodo, addTodoAfter } from '../actions'
 import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
@@ -55,6 +55,12 @@ const mapDispatchToProps = (dispatch) => {
       console.log('onTodoUpdate called!');
       dispatch(updateTodo(id, text));
     },
+
+    onTodoReturnPress: (id) => {
+      console.log('onTodoReturnPress called at id ', id);
+      dispatch(addTodoAfter(id));
+    },
+
   }
 }
 

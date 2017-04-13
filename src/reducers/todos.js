@@ -31,7 +31,7 @@ const sampleTodosForDebug = [{
 }];
 
 const todo = (state = {}, action) => {
-  console.log(`todo reducer called. state: ${state} | action: ${action}`);
+  console.log('todo reducer called. state: ', state, ' | action: ', action);
   switch (action.type) {
     case 'ADD_TODO':
       return {
@@ -39,6 +39,20 @@ const todo = (state = {}, action) => {
         text: action.text,
         completed: false
       }
+
+    case 'ADD_TODO_AFTER':
+      if (state.id === action.id) {
+        console.log("match!");
+        return [
+          state,
+          {
+            id: action.newId,
+            text: '',
+            completed: false
+          }
+        ]
+      }
+      return [state];
 
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {
@@ -73,6 +87,14 @@ const todos = (state = sampleTodosForDebug, action) => {
         ...state,
         todo(undefined, action)
       ]
+    case 'ADD_TODO_AFTER':
+      console.log('ADD_TODO_AFTER reducer. action: ', action);
+      let newState = [];
+      for (var t of state) {
+        // todo(t, action) will return [t, *emptyaction*] if t.id === action.id
+        newState = newState.concat(todo(t, action))
+      }
+      return newState
     case 'TOGGLE_TODO':
       return state.map(t =>
         todo(t, action)

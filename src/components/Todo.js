@@ -13,7 +13,7 @@
  * file 'LICENSE', which is part of this source code package.
  */
 
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
@@ -21,12 +21,16 @@ import IconButton from 'material-ui/IconButton';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
+import { addTodo } from '../actions'
+
+// import { connect } from 'react-redux';
+
 
 const iconStyles = {
   margin: 5,
 }
 
-const Todo = ({ onClick, onDelete, onUpdate, completed, text, dispatch }) => (
+const Todo = ({ onClick, onDelete, onUpdate, onReturnPress, completed, text, todoId }) => (
   <ListItem
     disabled={true}
     style={{
@@ -53,10 +57,23 @@ const Todo = ({ onClick, onDelete, onUpdate, completed, text, dispatch }) => (
       hintText="Enter text here"
       fullWidth={false}
       value={text}
+      ref={ function(input) {
+        console.log('input: ', input)
+        if (todoId === -2) {
+          input.focus()
+        }
+      }.bind(this) }
       disabled={completed}
       onChange={ (e, newValue) => {
         console.log("e, new value: ", e, newValue);
         onUpdate(newValue);} }
+      onKeyUp={ ((e) => {
+        e.preventDefault();
+        console.log("Text field keyUp: ", e.which);
+        if (e.which === 13) {  // enter key
+          onReturnPress();
+        }
+      }).bind(this)}
       style={{
         margin: 0,
         display: 'inline-block',

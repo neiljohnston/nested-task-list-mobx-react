@@ -42,6 +42,11 @@ const styles = {
   },
   footerArea: {
     padding: 20,
+  },
+  addButton: {
+    textAlign: 'right',
+    margin: '10pt',
+    marginRight: '15pt',
   }
 };
 
@@ -58,7 +63,9 @@ export default class Primary extends Component {
           />
           <VisibleTodoList />
           <div style={styles.footerArea}>
-            <AddTodo />
+            <div style={styles.addButton}>
+              <AddTodo />
+            </div>
             <Footer />
           </div>
         </Paper>

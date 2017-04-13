@@ -20,24 +20,27 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
 
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
+const styles = {
+  buttonStyle: {
+    marginRight: 20,
+  },
+};
+
 let AddTodo = ({ dispatch }) => {
-  let input
 
   return (
-    <div>
-      <form onSubmit={e => {
+    <FloatingActionButton
+      style={styles.buttonStyle}
+      onTouchTap={e => {
         e.preventDefault()
-        dispatch(addTodo(input.value))
-        input.value = ''
-      }}>
-        <input ref={node => {
-          input = node
-        }} />
-        <button type="submit">
-          Add Todo
-        </button>
-      </form>
-    </div>
+        dispatch(addTodo(''))
+      }}
+      >
+      <ContentAdd />
+    </FloatingActionButton>
   )
 }
 AddTodo = connect()(AddTodo)

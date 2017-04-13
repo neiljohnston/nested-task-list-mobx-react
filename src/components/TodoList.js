@@ -26,15 +26,17 @@ import Divider from 'material-ui/Divider';
 
 import Todo from './Todo'
 
-const TodoList = ({ todos, onTodoClick, onTodoDelete, onTodoUpdate }) => (
+const TodoList = ({ todos, onTodoClick, onTodoDelete, onTodoUpdate, onTodoReturnPress }) => (
   <List>
     <Subheader>[Insert Explanatory Text Here]</Subheader>
     {todos.map(todo =>
       <Todo
         key={todo.id}
         {...todo}
+        todoId={todo.id}
         onClick={() => onTodoClick(todo.id)}
         onDelete={() => onTodoDelete(todo.id)}
+        onReturnPress={ () => onTodoReturnPress(todo.id) }
         onUpdate={(newValue) => {
           console.log("TodoList onUpdate anon function. newValue: ", newValue);
           onTodoUpdate(todo.id, newValue);

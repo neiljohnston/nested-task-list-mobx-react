@@ -28,6 +28,14 @@ export const addTodo = (text) => {
  }
 }
 
+export const addTodoAfter = (id) => {
+  return {
+    type: 'ADD_TODO_AFTER',
+    id: id,
+    newId: nextTodoId++,
+  }
+}
+
 export const setVisibilityFilter = (filter) => {
  return {
    type: 'SET_VISIBILITY_FILTER',
