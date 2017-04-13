@@ -39,14 +39,26 @@ const todo = (state = {}, action) => {
         text: action.text,
         completed: false
       }
+
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {
         return state
       }
-
       return Object.assign({}, state, {
         completed: !state.completed
       })
+
+    case 'UPDATE_TODO':
+      console.log('Reducer case: UPDATE_TODO');
+      if (state.id !== action.id) {
+        return state;
+      }
+      let newState = {
+        ...state,
+        text: action.text,
+      }
+      console.log('New State:', newState);
+      return newState;
 
     default:
       return state
@@ -68,6 +80,10 @@ const todos = (state = sampleTodosForDebug, action) => {
     case 'DELETE_TODO':
       return state.filter(t =>
         t.id !== action.id
+      )
+    case 'UPDATE_TODO':
+      return state.map(t =>
+        todo(t, action)
       )
     default:
       return state

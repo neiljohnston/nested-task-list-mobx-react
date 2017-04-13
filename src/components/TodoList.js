@@ -15,19 +15,34 @@
 
 import React, { PropTypes } from 'react';
 
+import {List, ListItem} from 'material-ui/List';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import Subheader from 'material-ui/Subheader';
+import Toggle from 'material-ui/Toggle';
+import Divider from 'material-ui/Divider';
+
 import Todo from './Todo'
 
-const TodoList = ({ todos, onTodoClick, onTodoDelete }) => (
-  <ul>
+const TodoList = ({ todos, onTodoClick, onTodoDelete, onTodoUpdate }) => (
+  <List>
+    <Subheader>[Insert Explanatory Text Here]</Subheader>
     {todos.map(todo =>
       <Todo
         key={todo.id}
         {...todo}
         onClick={() => onTodoClick(todo.id)}
         onDelete={() => onTodoDelete(todo.id)}
+        onUpdate={(newValue) => {
+          console.log("TodoList onUpdate anon function. newValue: ", newValue);
+          onTodoUpdate(todo.id, newValue);
+        }
+        }
       />
     )}
-  </ul>
+  </List>
 )
 
 TodoList.propTypes = {

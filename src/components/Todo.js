@@ -18,15 +18,22 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+
 
 const iconStyles = {
   margin: 5,
 }
 
-const Todo = ({ onClick, onDelete, completed, text, dispatch }) => (
-  <li
+const Todo = ({ onClick, onDelete, onUpdate, completed, text, dispatch }) => (
+  <ListItem
+    disabled={true}
     style={{
-      textDecoration: completed ? 'line-through' : 'none'
+      display: 'flex',
+      flexWrap: 'wrap',
+      padding: 5,
+      alignItems: 'center',
     }}
   >
     <Checkbox
@@ -37,22 +44,31 @@ const Todo = ({ onClick, onDelete, completed, text, dispatch }) => (
       style={{
         display: 'inline-block',
         width: '',
-        margin: '0 10',
+        margin: '0',
+        marginLeft: 10,
         verticalAlign: 'center',
       }}
     />
     <TextField
-      hintText="Full width"
+      hintText="Enter text here"
       fullWidth={false}
       value={text}
       disabled={completed}
+      onChange={ (e, newValue) => {
+        console.log("e, new value: ", e, newValue);
+        onUpdate(newValue);} }
+      style={{
+        margin: 0,
+        display: 'inline-block',
+        flexGrow: 2,
+      }}
     />
     <IconButton
       onTouchTap={onDelete}
       tooltip="Delete Todo">
       <FontIcon className="material-icons" style={iconStyles} >delete</FontIcon>
     </IconButton>
-  </li>
+  </ListItem>
 )
 
 Todo.propTypes = {
