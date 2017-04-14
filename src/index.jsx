@@ -1,14 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'mobx-react';
+
 import AppState from './AppState';
 import App from './App';
 
 const appState = new AppState();
+window.store = appState;
 
 render(
   <AppContainer>
-    <App appState={appState} />
+    <Provider store={appState}>
+      <App />
+    </Provider>
   </AppContainer>,
   document.getElementById('root')
 );
@@ -19,7 +24,9 @@ if (module.hot) {
 
     render(
       <AppContainer>
-        <NextApp appState={appState} />
+        <Provider store={appState}>
+          <NextApp />
+        </Provider>
       </AppContainer>,
       document.getElementById('root')
     );
