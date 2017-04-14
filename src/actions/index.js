@@ -66,3 +66,10 @@ export const updateTodo = (id, text) => {
     text,
   }
 }
+
+export const clearFocus = (id) => {
+  return {
+    type: 'CLEAR_FOCUS',
+    id
+  }
+}

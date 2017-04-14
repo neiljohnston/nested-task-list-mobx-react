@@ -17,17 +17,20 @@
 const sampleTodosForDebug = [{
  id: -1,
  completed: false,
- text: 'Todo number 1'
+ text: 'Todo number 1',
+ shouldGetFocus: false,
 },
 {
  id: -2,
  completed: false,
- text: 'Todo number 2'
+ text: 'Todo number 2',
+ shouldGetFocus: false,
 },
 {
  id: -3,
  completed: false,
- text: 'Todo number 3'
+ text: 'Todo number 3',
+ shouldGetFocus: false,
 }];
 
 const todo = (state = {}, action) => {
@@ -37,7 +40,8 @@ const todo = (state = {}, action) => {
       return {
         id: action.id,
         text: action.text,
-        completed: false
+        completed: false,
+        shouldGetFocus: true,
       }
 
     case 'ADD_TODO_AFTER':
@@ -48,11 +52,22 @@ const todo = (state = {}, action) => {
           {
             id: action.newId,
             text: '',
-            completed: false
+            completed: false,
+            shouldGetFocus: true,
           }
         ]
       }
       return [state];
+
+    case 'CLEAR_FOCUS':
+      if (state.id === action.id) {
+        console.log('CLEAR_FOCUS - state: ', state)
+        return {
+          ...state,
+          shouldGetFocus: false,
+        }
+      }
+      return state
 
     case 'TOGGLE_TODO':
       if (state.id !== action.id) {
@@ -104,6 +119,10 @@ const todos = (state = sampleTodosForDebug, action) => {
         t.id !== action.id
       )
     case 'UPDATE_TODO':
+      return state.map(t =>
+        todo(t, action)
+      )
+    case 'CLEAR_FOCUS':
       return state.map(t =>
         todo(t, action)
       )
