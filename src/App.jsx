@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div>
       <MuiThemeProvider>
-        <Primary />
+        <Primary store={this.props.store} />
       </MuiThemeProvider>
 
     </div>

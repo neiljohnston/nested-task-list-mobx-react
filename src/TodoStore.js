@@ -14,7 +14,7 @@
 
 ********************************************** */
 
-import { observable, computed } from 'mobx';
+import { observable, computed, action, autorun } from 'mobx';
 
 let nextTodoId = 0;
 
@@ -23,10 +23,12 @@ class Todo {
   @observable id;
   @observable completed;
 
+  @action.bound
   toggle() {
     this.completed = !this.completed;
   }
 
+  @action.bound
   update(text) {
     this.text = text;
   }
@@ -38,7 +40,7 @@ class Todo {
   }
 }
 
-class TodoStore {
+export class TodoStore {
 
   // can be SHOW_ALL, SHOW_ACTIVE or SHOW_COMPLETED
   @observable visibilityFilter = 'SHOW_ALL';
@@ -62,16 +64,19 @@ class TodoStore {
     }
   }
 
+  @action.bound
   addTodo() {
     this.todos.push(new Todo());
   }
 
+  @action.bound
   addTodoAfter(id) {
     // I will be implementing a tree structure soon, so this will change.
     // In the meantime, just add at the end.
     this.todos.push(new Todo());
   }
 
+  @action.bound
   deleteTodo(index) {
     this.todos.splice(index, 1);
   }
@@ -83,10 +88,11 @@ class TodoStore {
 
     this.addTodo.bind(this);
     this.addTodoAfter.bind(this);
-    this.deleteTodo.bind(this);
+    // this.deleteTodo.bind(this);
+    autorun(() => console.log("visibilityFilter = ", this.visibilityFilter))
 
   }
 
 }
 
-export default new TodoStore;
+export default new TodoStore();

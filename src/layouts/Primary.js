@@ -49,27 +49,30 @@ const styles = {
 };
 
 
-export default class Primary extends React.Component {
+@observer class Primary extends React.Component {
 
   render() {
+
     return (
       <div style={styles.container}>
         <Paper style={styles.paper} zDepth={4}>
           <AppBar
-            title="Nested Task List - created with ❤️ by Justin Haaheim"
+            title="Nested Task List"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
-          <TodoList />
+          <TodoList store={this.props.store} />
           <div style={styles.footerArea}>
             <div style={styles.addButton}>
             </div>
-            <Footer />
+            <Footer store={this.props.store} />
           </div>
         </Paper>
       </div>
     );
   }
 }
+
+export default Primary;
 
 // const muiTheme = getMuiTheme({
 //   palette: {

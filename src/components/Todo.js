@@ -40,7 +40,7 @@ const iconStyles = {
   }
 
   render() {
-    console.log('todo props: ', this.props);
+    console.log('Todo props: ', this.props);
 
     const {
       onClick,
@@ -80,9 +80,7 @@ const iconStyles = {
           value={text}
           ref={ (input) => { this.textFieldRef = input } }
           disabled={ completed }
-          onChange={ (e, newValue) => {
-            console.log("e, new value: ", e, newValue);
-            onUpdate(newValue);} }
+          onChange={ (e, newValue) => onUpdate(newValue) }
           onKeyUp={ (e) => {
             e.preventDefault();
             console.log("Text field keyUp: ", e.which);

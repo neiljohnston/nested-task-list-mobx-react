@@ -29,27 +29,35 @@ const nearbyIcon = <IconLocationOn />;
 @observer class Footer extends React.Component {
 
   render() {
+    const {store} = this.props;
+
     return (
-      <BottomNavigation selectedIndex={1}>
+      <BottomNavigation selectedIndex={
+        {
+          'SHOW_ALL': 0,
+          'SHOW_ACTIVE': 1,
+          'SHOW_COMPLETED': 2
+        }[store.visibilityFilter]
+      }>
           <BottomNavigationItem
             label="Show All"
             icon={recentsIcon}
             onTouchTap={() =>
-              this.props.store.visibilityFilter = 'SHOW_ALL'
+              store.visibilityFilter = 'SHOW_ALL'
             }
           />
           <BottomNavigationItem
             label="Show Active"
             icon={favoritesIcon}
             onTouchTap={() =>
-              this.props.store.visibilityFilter = 'SHOW_ACTIVE'
+              store.visibilityFilter = 'SHOW_ACTIVE'
             }
           />
           <BottomNavigationItem
             label="Show Completed"
             icon={nearbyIcon}
             onTouchTap={() =>
-              this.props.store.visibilityFilter = 'SHOW_COMPLETED'
+              store.visibilityFilter = 'SHOW_COMPLETED'
             }
           />
       </BottomNavigation>

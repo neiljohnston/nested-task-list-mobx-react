@@ -21,12 +21,12 @@ import { Provider } from 'mobx-react';
 import TodoStore from './TodoStore'; // already instantiated object
 import App from './App';
 
-window.TodoStore = TodoStore;
+// window.TodoStore = TodoStore;
 
 render(
   <AppContainer>
     <Provider store={TodoStore}>
-      <App />
+      <App store={TodoStore} cheese={"tasty"}/>
     </Provider>
   </AppContainer>,
   document.getElementById('root')
@@ -39,7 +39,7 @@ if (module.hot) {
     render(
       <AppContainer>
         <Provider store={TodoStore}>
-          <NextApp />
+          <NextApp store={TodoStore} />
         </Provider>
       </AppContainer>,
       document.getElementById('root')

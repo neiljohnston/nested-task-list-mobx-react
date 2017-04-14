@@ -26,36 +26,31 @@ import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 
 import Todo from './Todo';
-import TodoStore from '../TodoStore';
+// import TodoStore from '../TodoStore';
 
 
 @observer class TodoList extends React.Component {
 
   render() {
 
-    console.log(TodoStore);
-    const { todos, addTodoAfter, deleteTodo } = TodoStore;
-    console.log("wtf...", addTodoAfter);
+    const { filteredTodos, addTodoAfter, addTodo, deleteTodo } = this.props.store;
 
     return (
       <List>
-        <Subheader>Created with love by Justin Haaheim</Subheader>
+        <Subheader>Created with ❤️ by Justin Haaheim</Subheader>
 
-        { todos.map((todo, index) => {
+        { filteredTodos.map((todo, index) => {
           console.log('map todo = ', todo.completed);
           return (<Todo
             key={todo.id}
+            store={this.props.store}
             completed={todo.completed}
             text={todo.text}
             arrayIndex={index}
             onClick={ todo.toggle }
             onDelete={ () => deleteTodo(index) }
-            onReturnPress={ addTodoAfter }
-            onUpdate={ (newValue) => {
-              console.log("TodoList onUpdate anon function. newValue: ", newValue);
-              todo.update(newValue);
-            }
-            }
+            onReturnPress={ addTodo }
+            onUpdate={ todo.update }
           />)
         }
         )
