@@ -16,7 +16,7 @@
 
 ********************************************** */
 
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 
 import Checkbox from 'material-ui/Checkbox';
@@ -32,7 +32,7 @@ const iconStyles = {
 }
 
 
-@inject('store') @observer class Todo extends Component {
+@observer class Todo extends React.Component {
 
   // Give focus to the most recently created todo item.
   componentDidMount() {
@@ -79,7 +79,7 @@ const iconStyles = {
           fullWidth={false}
           value={text}
           ref={ (input) => { this.textFieldRef = input } }
-          disabled={completed}
+          disabled={ completed }
           onChange={ (e, newValue) => {
             console.log("e, new value: ", e, newValue);
             onUpdate(newValue);} }
@@ -87,7 +87,7 @@ const iconStyles = {
             e.preventDefault();
             console.log("Text field keyUp: ", e.which);
             if (e.which === 13) {  // enter key
-              this.props.store.addTodo();
+              onReturnPress();
             }
           }}
           style={{

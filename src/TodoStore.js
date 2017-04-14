@@ -1,6 +1,6 @@
 /************************************************
 
-  Name: /src/AppState.js
+  Name: /src/TodoStore.js
 
   Description: This is the primary mobx store for our app.
 
@@ -31,14 +31,14 @@ class Todo {
     this.text = text;
   }
 
-  constructor(value) {
-    this.value = value;
+  constructor(text = '') {
+    this.text = text;
     this.id = nextTodoId++;
-    this.complete = false;
+    this.completed = false;
   }
 }
 
-class AppState {
+class TodoStore {
 
   // can be SHOW_ALL, SHOW_ACTIVE or SHOW_COMPLETED
   @observable visibilityFilter = 'SHOW_ALL';
@@ -73,31 +73,20 @@ class AppState {
   }
 
   deleteTodo(index) {
-    this.todos.splice(index, 1)
+    this.todos.splice(index, 1);
   }
 
   constructor() {
-    this.todos = [{
-     id: -1,
-     completed: false,
-     text: 'Todo number 1',
-    },
-    {
-     id: -2,
-     completed: false,
-     text: 'Todo number 2',
-    },
-    {
-     id: -3,
-     completed: false,
-     text: 'Todo number 3',
-    }];
+    this.todos.push(new Todo('Todo number 1!'));
+    this.todos.push(new Todo('Todo number 2!'));
+    this.todos.push(new Todo('Todo number 3!'));
 
     this.addTodo.bind(this);
     this.addTodoAfter.bind(this);
+    this.deleteTodo.bind(this);
 
   }
 
 }
 
-export default AppState;
+export default new TodoStore;

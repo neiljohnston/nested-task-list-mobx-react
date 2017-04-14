@@ -13,7 +13,7 @@
 
 ********************************************** */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react';
 
 import {List, ListItem} from 'material-ui/List';
@@ -25,51 +25,45 @@ import Subheader from 'material-ui/Subheader';
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 
-import Todo from './Todo'
+import Todo from './Todo';
+import TodoStore from '../TodoStore';
 
 
-@inject('store') @observer class TodoList extends React.Component {
+@observer class TodoList extends React.Component {
 
   render() {
 
-    console.log(this.props)
-    const { todos, addTodoAfter, deleteTodo } = this.props.store;
+    console.log(TodoStore);
+    const { todos, addTodoAfter, deleteTodo } = TodoStore;
     console.log("wtf...", addTodoAfter);
 
     return (
       <List>
         <Subheader>Created with love by Justin Haaheim</Subheader>
 
-        { todos.map((todo, index) =>
-          <Todo
+        { todos.map((todo, index) => {
+          console.log('map todo = ', todo.completed);
+          return (<Todo
             key={todo.id}
             completed={todo.completed}
             text={todo.text}
             arrayIndex={index}
             onClick={ todo.toggle }
             onDelete={ () => deleteTodo(index) }
-            onReturnPress={ this.props.store.addTodoAfter }
+            onReturnPress={ addTodoAfter }
             onUpdate={ (newValue) => {
               console.log("TodoList onUpdate anon function. newValue: ", newValue);
               todo.update(newValue);
             }
             }
-          />
-        )}
+          />)
+        }
+        )
+      }
 
       </List>
     )
   }
 }
-
-// TodoList.propTypes = {
-//   todos: PropTypes.arrayOf(PropTypes.shape({
-//     id: PropTypes.number.isRequired,
-//     completed: PropTypes.bool.isRequired,
-//     text: PropTypes.string.isRequired
-//   }).isRequired).isRequired,
-//   onTodoClick: PropTypes.func.isRequired,
-//   onTodoDelete: PropTypes.func.isRequired,
-// }
 
 export default TodoList;

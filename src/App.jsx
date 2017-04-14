@@ -30,13 +30,13 @@ import Primary from './layouts/Primary';
 class App extends Component {
   render() {
     console.log("From App, store: ", this.props.store);
-    
+
     return (
       <div>
       <MuiThemeProvider>
         <Primary />
       </MuiThemeProvider>
-      <DevTools />
+
     </div>
     );
   }
