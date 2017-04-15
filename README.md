@@ -1,9 +1,11 @@
 Nested Task List (React + MobX)
 =====================
 
-A task list (or "todo list") prototype built in [React](https://facebook.github.io/react) with [MobX](https://mobxjs.github.io/mobx) using the [Material-UI](http://www.material-ui.com/) React component library.
+Nested Task List is a [React](https://facebook.github.io/react) -based task list (or "todo list") prototype written in JavaScript (ES6+) built with [MobX](https://mobxjs.github.io/mobx) using the [Material-UI](http://www.material-ui.com/) React component library.
 
 See it in action: [Nested Task List (Demo)](https://rawgit.com/justinhaaheim/nested-task-list-mobx-react/master/index.html)
+
+Project created by [Justin Haaheim](https://github.com/justinhaaheim). See his other projects at his [github](https://github.com/justinhaaheim) page.
 
 # Features
 
