@@ -31,6 +31,8 @@ const iconStyles = {
   margin: 5,
 }
 
+const INDENT_SIZE = 20;
+
 
 @observer class Todo extends React.Component {
 
@@ -40,16 +42,86 @@ const iconStyles = {
   }
 
   render() {
-    console.log('Todo props: ', this.props);
 
     const {
-      onClick,
-      onDelete,
-      onUpdate,
-      onReturnPress,
+      toggle,
+      deleteSelf,
+      addAfter,
+      indent,
+      unindent,
+      moveUp,
+      moveDown,
+      update,
+      depth,
       completed,
       text,
+      node,
     } = this.props;
+
+    // It's important for the interface to function correctly to handle
+    // both keydown and keyup. In the case of tab, for example, if you just
+    // handle keydown, keyup will still cause the browser to advance focus
+    // to the next element.
+    const handleKeyPress = (e) => {
+      console.log('Text field keyUp key: ', e.which);
+
+      switch(e.which) {
+        case 13:  // enter
+          e.preventDefault();
+          if (e.type === 'keydown') {
+            addAfter();
+          }
+          break;
+        case 8:
+          // backspace (often labeled 'delete').
+          // Only deletes the todo if the text field is empty.
+          if (text.length === 0) {
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              deleteSelf();
+            }
+          }
+          break;
+        case 9:
+          if (!e.shiftKey) {  // tab
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              indent();
+            }
+            break;
+          } else {  // shift+tab
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              unindent();
+            }
+            break;
+          }
+        case 38:  // up arrow
+          if (e.metaKey) {  // Cmd+up / Meta+up
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              console.log('moveUp');
+              moveUp();
+            }
+          }
+          break;
+        case 40:  // down arrow
+          if (e.metaKey) {  // Cmd+up / Meta+up
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              moveDown();
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+
+    // the (non displaying) root node is depth 0. first non-indented level
+    // is at depth 1.
+    const marginLeft = (depth - 1) * INDENT_SIZE + 'pt';
 
     return (
       <ListItem
@@ -59,13 +131,14 @@ const iconStyles = {
           flexWrap: 'wrap',
           padding: 5,
           alignItems: 'center',
+          marginLeft: marginLeft,
         }}
       >
         <Checkbox
           name=""
           label=""
           checked={completed}
-          onClick={onClick}
+          onClick={toggle}
           style={{
             display: 'inline-block',
             width: '',
@@ -75,19 +148,15 @@ const iconStyles = {
           }}
         />
         <TextField
-          hintText="Enter text here"
+          hintText=""
+          id={ node.id + 'textfield' }
           fullWidth={false}
           value={text}
           ref={ (input) => { this.textFieldRef = input } }
           disabled={ completed }
-          onChange={ (e, newValue) => onUpdate(newValue) }
-          onKeyUp={ (e) => {
-            e.preventDefault();
-            console.log("Text field keyUp: ", e.which);
-            if (e.which === 13) {  // enter key
-              onReturnPress();
-            }
-          }}
+          onChange={ (e, newValue) => update(newValue) }
+          onKeyDown={ handleKeyPress.bind(this) }
+          onKeyUp={ handleKeyPress.bind(this) }
           style={{
             margin: 0,
             display: 'inline-block',
@@ -95,7 +164,7 @@ const iconStyles = {
           }}
         />
         <IconButton
-          onTouchTap={onDelete}
+          onTouchTap={deleteSelf}
           tooltip="Delete Todo">
           <FontIcon className="material-icons" style={iconStyles} >delete</FontIcon>
         </IconButton>
@@ -103,15 +172,5 @@ const iconStyles = {
     )
   }
 }
-
-// Todo = connect()(Todo);
-
-// Todo.propTypes = {
-//   onClick: PropTypes.func.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-// //  onType: PropTypes.func.isRequired,
-//   completed: PropTypes.bool.isRequired,
-//   text: PropTypes.string.isRequired
-// }
 
 export default Todo;

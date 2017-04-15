@@ -18,15 +18,19 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'mobx-react';
 
-import TodoStore from './TodoStore'; // already instantiated object
+import TodoListStore from './stores/TodoListStore'; // already instantiated object
 import App from './App';
 
-// window.TodoStore = TodoStore;
+// Note: The Provider/inject method of passing the store isn't currently used.
+
+// For debugging
+window.TodoListStore = TodoListStore;
+window.todoRoot = TodoListStore.todoRoot;
 
 render(
   <AppContainer>
-    <Provider store={TodoStore}>
-      <App store={TodoStore} cheese={"tasty"}/>
+    <Provider store={TodoListStore}>
+      <App store={TodoListStore} />
     </Provider>
   </AppContainer>,
   document.getElementById('root')
@@ -38,8 +42,8 @@ if (module.hot) {
 
     render(
       <AppContainer>
-        <Provider store={TodoStore}>
-          <NextApp store={TodoStore} />
+        <Provider store={TodoListStore}>
+          <NextApp store={TodoListStore} />
         </Provider>
       </AppContainer>,
       document.getElementById('root')

@@ -21,7 +21,6 @@ import ActionGrade from 'material-ui/svg-icons/action/grade';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import ContentSend from 'material-ui/svg-icons/content/send';
-import Subheader from 'material-ui/Subheader';
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 
@@ -32,30 +31,31 @@ import Todo from './Todo';
 @observer class TodoList extends React.Component {
 
   render() {
-
     const { filteredTodos, addTodoAfter, addTodo, deleteTodo } = this.props.store;
+
+    const items = filteredTodos.map((todo, index) => (
+      <Todo
+        key={todo.id}
+        store={this.props.store}
+        node={todo}
+        depth={todo.depth}
+        completed={todo.completed}
+        text={todo.text}
+        arrayIndex={index}
+        toggle={ todo.toggle }
+        deleteSelf={ todo.delete }
+        addAfter={ () => addTodoAfter(todo) }
+        indent={ todo.indent }
+        unindent={ todo.unindent }
+        update={ todo.update }
+        moveUp={ todo.moveUp }
+        moveDown={ todo.moveDown }
+      />
+    ))
 
     return (
       <List>
-        <Subheader>Created with ❤️ by Justin Haaheim</Subheader>
-
-        { filteredTodos.map((todo, index) => {
-          console.log('map todo = ', todo.completed);
-          return (<Todo
-            key={todo.id}
-            store={this.props.store}
-            completed={todo.completed}
-            text={todo.text}
-            arrayIndex={index}
-            onClick={ todo.toggle }
-            onDelete={ () => deleteTodo(index) }
-            onReturnPress={ addTodo }
-            onUpdate={ todo.update }
-          />)
-        }
-        )
-      }
-
+        {items}
       </List>
     )
   }

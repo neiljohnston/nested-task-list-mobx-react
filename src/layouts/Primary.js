@@ -19,6 +19,7 @@ import { observer } from 'mobx-react';
 
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
+import Subheader from 'material-ui/Subheader';
 
 import Footer from '../components/Footer';
 // import AddTodo from '../containers/AddTodo';
@@ -60,6 +61,7 @@ const styles = {
             title="Nested Task List"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
+          <Subheader>Created with love by Justin Haaheim</Subheader>
           <TodoList store={this.props.store} />
           <div style={styles.footerArea}>
             <div style={styles.addButton}>
