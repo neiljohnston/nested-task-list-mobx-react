@@ -1,28 +1,32 @@
 {
-  "name": "mobx-react-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate for MobX + React project with JSX, ES6 compilation and hot code reloading",
+  "name": "nested-task-list-mobx-react",
+  "version": "0.5.0",
+  "description": "A highly functional nested task list prototype built with React + MobX and Material-ui",
+  "homepage": "https://github.com/justinhaaheim/nested-task-list-mobx-react",
+  "author": {
+    "name": "Justin Haaheim",
+    "email": "io@justinh.org",
+    "url": "https://github.com/justinhaaheim"
+  },
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
+    "url": "https://github.com/justinhaaheim/nested-task-list-mobx-react.git"
   },
   "keywords": [
     "react",
     "reactjs",
-    "boilerplate",
     "mobx",
-    "starter-kit"
+    "material",
+    "material-ui",
   ],
-  "author": "Michel Weststrate <mweststrate@gmail.com> (http://github.com/mweststrate)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mobxjs/mobx/issues"
+    "url": "https://github.com/justinhaaheim/nested-task-list-mobx-react/issues"
   },
-  "homepage": "http://mobxjs.github.com/mobx",
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.1.0",
