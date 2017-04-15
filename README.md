@@ -1,9 +1,14 @@
-Nested Task List (React + MobX)
+Nested Task List (React + MobX) ☑️
 =====================
 
-Nested Task List is a [React](https://facebook.github.io/react) -based task list (or "todo list") prototype written in JavaScript (ES6+) built with [MobX](https://mobxjs.github.io/mobx) using the [Material-UI](http://www.material-ui.com/) React component library.
+**Nested Task List** is a [React](https://facebook.github.io/react) -based task list (or "todo list") prototype written in JavaScript (ES6+) built with [MobX](https://mobxjs.github.io/mobx) using the [Material-UI](http://www.material-ui.com/) React component library.
 
 See it in action: [Nested Task List (Demo)](https://rawgit.com/justinhaaheim/nested-task-list-mobx-react/master/index.html)
+
+<video width="320" height="240" autoplay>
+  <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 Project created by [Justin Haaheim](https://github.com/justinhaaheim). See his other projects at his [github](https://github.com/justinhaaheim) page.
 
