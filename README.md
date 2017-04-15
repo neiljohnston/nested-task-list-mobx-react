@@ -38,15 +38,11 @@ yarn start
 open http://localhost:3000
 ```
 
-# Acknowledgements
-
-Thanks to [Michael Weststrate](https://github.com/mweststrate) for the [mobx-react-boilerplate](https://github.com/mobxjs/mobx-react-boilerplate) scaffolding.
-
 # License
 
 MIT
 
 # Contact
 
-I enjoy hearing from people checking out my projects. Get in touch on twitter (@justinhaaheim)[https://twitter.com/justinhaaheim] or email me at `io` @ `justinh` dot `org`.
+I enjoy hearing from people checking out my projects. Get in touch on twitter [@justinhaaheim](https://twitter.com/justinhaaheim) or email me at `io` @ `justinh` dot `org`.
 
