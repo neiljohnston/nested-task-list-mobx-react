@@ -18,7 +18,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 import FontIcon from 'material-ui/FontIcon';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
 const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;

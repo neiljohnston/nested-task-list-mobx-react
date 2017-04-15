@@ -31,7 +31,7 @@ const iconStyles = {
   margin: 5,
 }
 
-const INDENT_SIZE = 20;
+const INDENT_SIZE = 25;
 
 
 @observer class Todo extends React.Component {

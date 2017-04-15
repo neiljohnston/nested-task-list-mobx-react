@@ -21,7 +21,7 @@
     "reactjs",
     "mobx",
     "material",
-    "material-ui",
+    "material-ui"
   ],
   "license": "MIT",
   "bugs": {
