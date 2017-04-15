@@ -17,8 +17,7 @@
 
 
 import React from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
+import { observer } from 'mobx-react';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -29,20 +28,21 @@ const styles = {
   },
 };
 
-let AddTodo = ({ dispatch }) => {
+
+let AddTodo = observer(({ store }) => {
 
   return (
     <FloatingActionButton
       style={styles.buttonStyle}
       onTouchTap={e => {
         e.preventDefault()
-        dispatch(addTodo(''))
+        store.addTodo()
       }}
       >
       <ContentAdd />
     </FloatingActionButton>
   )
 }
-AddTodo = connect()(AddTodo)
+);
 
 export default AddTodo

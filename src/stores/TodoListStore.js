@@ -96,31 +96,13 @@ export class TodoListStore {
     return newNode;
   }
 
-  // @action.bound
-  // addTodoAfterId(id = undefined, text = '') {
-  //   console.log('addTodoAfter: id = ', id);
-  //   console.log('addTodoAfter: typeof id = ', typeof id);
-  //   if ('undefined' === typeof id) {
-  //     // If no id is provided push a new Todo onto the base level list.
-  //     this.todoRoot.children.push(new TodoNode(this.todoRoot, text));
-  //     return;
-  //   }
-  //
-  //   const node = this.findNodeByIdSafe(id);
-  //   // insert add a new TodoNode in the parent's children array after the index
-  //   // of node
-  //   node.parent
-  //       .children
-  //       .splice(node.index + 1,
-  //               0,
-  //               new TodoNode(node.parent, text));
-  // }
-
   @action.bound
   addTodoAfter(node, text='') {
+    const newNode = new TodoNode(node.parent, text);
     node.parent.children.splice(node.index + 1,
                                 0, // insert, rather than overwrite
-                                new TodoNode(node.parent, text));
+                                newNode);
+    return newNode;
   }
 
   @action.bound
@@ -135,21 +117,10 @@ export class TodoListStore {
   constructor() {
     this.todoRoot = new TodoNode(); // parent is undefined
 
-    // For debugging, populate with a few sample tasks.
-    this.addTodo('Todo number 1!');
-    this.addTodo('Todo number 2!');
-    this.addTodo('Todo number 3!');
-
-    // autorun(() => console.log('todoRoot: ', this.todoRoot ));
-
-    // this.addTodo.bind(this);
-    // this.addTodoAfter.bind(this);
-    // this.deleteTodo.bind(this);
-
-    // For debugging:
-
-    // autorun(() => console.log('Flattened TodoList = ',
-    //                           this.todos.map( (t, i) => t.text )));
+    // // For debugging, populate with a few sample tasks.
+    // this.addTodo('Todo number 1!');
+    // this.addTodo('Todo number 2!');
+    // this.addTodo('Todo number 3!');
 
   }
 

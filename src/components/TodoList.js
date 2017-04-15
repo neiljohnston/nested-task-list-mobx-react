@@ -30,7 +30,37 @@ import Todo from './Todo';
 
 @observer class TodoList extends React.Component {
 
+  cheesyDemo() {
+    function setTimeouts(arrayOfFunctions, period) {
+      var counter = 0;
+
+      // queues up functions every `period` milliseconds
+      for (let f of arrayOfFunctions) {
+        setTimeout(f, counter);
+        counter += period;
+      }
+    }
+
+    const { addTodo } = this.props.store;
+
+    setTimeouts([
+      () => { addTodo("Welcome to this hierarchical task list!") },
+      () => { addTodo("You'll find it quite intuitive. Just type!") },
+      () => { addTodo("You can add a new item by pressing enter.") },
+      () => { addTodo("You can indent/unindent with tab/shift+tab.") },
+      () => { addTodo("Enjoy!") }
+    ],
+    1500);
+  }
+
+  componentDidMount() {
+    if (this.props.store.demoMode) {
+      this.cheesyDemo();
+    }
+  }
+
   render() {
+
     const { filteredTodos, addTodoAfter, addTodo, deleteTodo } = this.props.store;
 
     const items = filteredTodos.map((todo, index) => (

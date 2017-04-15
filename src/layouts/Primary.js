@@ -22,7 +22,7 @@ import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 
 import Footer from '../components/Footer';
-// import AddTodo from '../containers/AddTodo';
+import AddTodo from '../containers/AddTodo';
 // import VisibleTodoList from '../containers/VisibleTodoList';
 import TodoList from '../components/TodoList';
 
@@ -34,18 +34,36 @@ const styles = {
     height: '100%',
   },
   paper: {
-    display: 'block',
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'column',
+    position: 'relative',
     margin: 20,
     marginBottom: 200,
     height: '100%',
+    maxWidth: '800px',
+    minHeight: '540px',
+  },
+  contentBody: {
+    position: 'relative',
+    height: '100%',
+//    flex: 2,
+    flexGrow: 2,
   },
   footerArea: {
-    padding: 20,
+    padding: 0,
+    position: 'relative',
+    bottom: '0px',
+    left: '0px',
+    right: '0px',
   },
   addButton: {
     textAlign: 'right',
-    margin: '10pt',
-    marginRight: '15pt',
+    position: 'absolute',
+    bottom: '55px',
+    right: '55px',
+    margin: '10px',
+    marginRight: '25px',
   }
 };
 
@@ -57,15 +75,18 @@ const styles = {
     return (
       <div style={styles.container}>
         <Paper style={styles.paper} zDepth={4}>
-          <AppBar
-            title="Nested Task List"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
-          <Subheader>Created with love by Justin Haaheim</Subheader>
-          <TodoList store={this.props.store} />
-          <div style={styles.footerArea}>
+          <div style={styles.contentBody}>
+            <AppBar
+              title="Nested Task List"
+              iconClassNameRight="muidocs-icon-navigation-expand-more"
+            />
+            <Subheader>Created with love by Justin Haaheim</Subheader>
+            <TodoList store={this.props.store} />
             <div style={styles.addButton}>
+              <AddTodo store={this.props.store} />
             </div>
+          </div>
+          <div style={styles.footerArea}>
             <Footer store={this.props.store} />
           </div>
         </Paper>
