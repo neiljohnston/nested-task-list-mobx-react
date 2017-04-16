@@ -1,6 +1,8 @@
 Reference Information
 ===========
 
+*This document contains notes and design plans for the project, as well as references to tools, sites, commands, etc. that pertain to the project. Whereas the [README](./README.md) is intended for public consumption, this will likely only make sense to other developers familiar with the project.*
+
 # Building
 
 To build for production, run:
