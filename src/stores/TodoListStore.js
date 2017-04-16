@@ -1,4 +1,4 @@
-/************************************************
+/**
 
   Name: /src/TodoListStore.js
 
@@ -15,7 +15,7 @@
 
 ********************************************** */
 
-import { observable, computed, action, autorun, toJS } from 'mobx';
+import { observable, computed, action } from 'mobx';
 
 import TodoNode from './TodoNode';
 
@@ -26,21 +26,24 @@ export class TodoListStore {
   @observable demoMode = true;
   @observable todoRoot;
 
+  constructor() {
+    this.todoRoot = new TodoNode(); // parent is undefined
+  }
+
   // returns a 'flattened' array of the todo tree.
   @computed get todos() {
     // recursive function to flatten children
-    var flattenChildren = (startNode) => {
-
-      var result = [];
+    const flattenChildren = (startNode) => {
+      let result = [];
 
       if (!startNode.isRoot) {
         result.push(startNode);
       }
-      for (let n of startNode.children) {
+      for (const n of startNode.children) {
         result = result.concat(flattenChildren(n));
       }
       return result;
-    }
+    };
     // flattenChildren = action(flattenChildren);
     return flattenChildren(this.todoRoot);
   }
@@ -50,13 +53,9 @@ export class TodoListStore {
       case 'SHOW_ALL':
         return this.todos;
       case 'SHOW_ACTIVE':
-        return this.todos.filter( t => {
-          return t.completed === false;
-        })
+        return this.todos.filter(t => t.completed === false);
       case 'SHOW_COMPLETED':
-        return this.todos.filter( t => {
-          return t.completed === true;
-      })
+        return this.todos.filter(t => t.completed === true);
       default:
         throw new Error('Invalid filter.');
     }
@@ -64,12 +63,12 @@ export class TodoListStore {
 
   @action.bound
   findNodeById(id, startNode = this.todoRoot) {
-    for (let n of startNode.children) {
+    for (const n of startNode.children) {
       if (n.id === id) {
         return n;
       }
       // Recurse down into n's children
-      let result = this.findNodeById(id, n);
+      const result = this.findNodeById(id, n);
       if (result) {  // if result is not undefined
         return result;
       }
@@ -82,7 +81,7 @@ export class TodoListStore {
   @action.bound
   findNodeByIdSafe(id) {
     const node = this.findNodeById(id);
-    if ('undefined' === typeof node) {
+    if (typeof node === 'undefined') {
       throw new Error(`No TodoNode with id ${id}`);
     }
     return node;
@@ -97,7 +96,7 @@ export class TodoListStore {
   }
 
   @action.bound
-  addTodoAfter(node, text='') {
+  addTodoAfter(node, text = '') {
     const newNode = new TodoNode(node.parent, text);
     node.parent.children.splice(node.index + 1,
                                 0, // insert, rather than overwrite
@@ -113,17 +112,6 @@ export class TodoListStore {
     const node = this.findNodeByIdSafe(id);
     node.parent.children.remove(node);
   }
-
-  constructor() {
-    this.todoRoot = new TodoNode(); // parent is undefined
-
-    // // For debugging, populate with a few sample tasks.
-    // this.addTodo('Todo number 1!');
-    // this.addTodo('Todo number 2!');
-    // this.addTodo('Todo number 3!');
-
-  }
-
 }
 
 export default new TodoListStore();

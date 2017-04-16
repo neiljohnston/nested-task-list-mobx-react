@@ -1,13 +1,11 @@
-/************************************************
+/**
 
   Name: /src/components/Todo.js
 
   Description: This is an individual todo.
 
   TODO:
-  - Implement hierarchy/indenting/child todos.
-  - Implement navigation by up/down arrows, and indentation with tab/shift+tab.
-
+  - Implement navigation by up/down arrows
 
   Copyright (c) 2017-present Justin Haaheim
 
@@ -17,19 +15,18 @@
 ********************************************** */
 
 import React from 'react';
-import { observer, inject } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
+import { ListItem } from 'material-ui/List';
 
 
 const iconStyles = {
   margin: 5,
-}
+};
 
 const INDENT_SIZE = 25;
 
@@ -42,7 +39,6 @@ const INDENT_SIZE = 25;
   }
 
   render() {
-
     const {
       toggle,
       deleteSelf,
@@ -58,14 +54,17 @@ const INDENT_SIZE = 25;
       node,
     } = this.props;
 
+    // the (non displaying) root node is depth 0. first non-indented level
+    // is at depth 1.
+    const marginLeft = `${(depth - 1) * INDENT_SIZE}pt`;
+
     // It's important for the interface to function correctly to handle
     // both keydown and keyup. In the case of tab, for example, if you just
     // handle keydown, keyup will still cause the browser to advance focus
     // to the next element.
     const handleKeyPress = (e) => {
-      console.log('Text field keyUp key: ', e.which);
-
-      switch(e.which) {
+      // console.log('Text field keyUp key: ', e.which);
+      switch (e.which) {
         case 13:  // enter
           e.preventDefault();
           if (e.type === 'keydown') {
@@ -100,7 +99,6 @@ const INDENT_SIZE = 25;
           if (e.metaKey) {  // Cmd+up / Meta+up
             e.preventDefault();
             if (e.type === 'keydown') {
-              console.log('moveUp');
               moveUp();
             }
           }
@@ -116,22 +114,17 @@ const INDENT_SIZE = 25;
         default:
           break;
       }
-    }
-
-
-    // the (non displaying) root node is depth 0. first non-indented level
-    // is at depth 1.
-    const marginLeft = (depth - 1) * INDENT_SIZE + 'pt';
+    };
 
     return (
       <ListItem
-        disabled={true}
+        disabled
         style={{
           display: 'flex',
-          flexWrap: 'wrap',
-          padding: 5,
+          flexWrap: 'nowrap',
+          padding: '3px',
           alignItems: 'center',
-          marginLeft: marginLeft,
+          marginLeft,
         }}
       >
         <Checkbox
@@ -149,14 +142,14 @@ const INDENT_SIZE = 25;
         />
         <TextField
           hintText=""
-          id={ node.id + 'textfield' }
+          id={`${node.id}textfield`}
           fullWidth={false}
           value={text}
-          ref={ (input) => { this.textFieldRef = input } }
-          disabled={ completed }
-          onChange={ (e, newValue) => update(newValue) }
-          onKeyDown={ handleKeyPress.bind(this) }
-          onKeyUp={ handleKeyPress.bind(this) }
+          ref={(input) => { this.textFieldRef = input; }}
+          disabled={completed}
+          onChange={(e, newValue) => update(newValue)}
+          onKeyDown={handleKeyPress.bind(this)}
+          onKeyUp={handleKeyPress.bind(this)}
           style={{
             margin: 0,
             display: 'inline-block',
@@ -165,11 +158,12 @@ const INDENT_SIZE = 25;
         />
         <IconButton
           onTouchTap={deleteSelf}
-          tooltip="Delete Todo">
+          tooltip="Delete Todo"
+        >
           <FontIcon className="material-icons" style={iconStyles} >delete</FontIcon>
         </IconButton>
       </ListItem>
-    )
+    );
   }
 }
 

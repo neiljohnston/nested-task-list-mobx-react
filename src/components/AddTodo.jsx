@@ -1,7 +1,8 @@
 /**
-  Name: /src/containers/AddTodo.js
 
-  Description: Box to add a todo.
+  Name: /src/containers/AddTodo.jsx
+
+  Description: Button to add a todo.
 
   TODO:
 
@@ -13,36 +14,24 @@
   This file is subject to the terms and conditions defined in
   file 'LICENSE', which is part of this source code package.
 
-***** */
+********************************************** */
 
 
-import React from 'react'
+import React from 'react';
 import { observer } from 'mobx-react';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
-const styles = {
-  buttonStyle: {
-    marginRight: 20,
-  },
-};
+const AddTodo = observer(({ store }) => (
+  <FloatingActionButton
+    onTouchTap={(e) => {
+      e.preventDefault();
+      store.addTodo();
+    }}
+  >
+    <ContentAdd />
+  </FloatingActionButton>
+));
 
-
-let AddTodo = observer(({ store }) => {
-
-  return (
-    <FloatingActionButton
-      style={styles.buttonStyle}
-      onTouchTap={e => {
-        e.preventDefault()
-        store.addTodo()
-      }}
-      >
-      <ContentAdd />
-    </FloatingActionButton>
-  )
-}
-);
-
-export default AddTodo
+export default AddTodo;

@@ -1,4 +1,4 @@
-/************************************************
+/**
 
   Name: /src/TodoNode.js
 
@@ -8,7 +8,6 @@
 
   TODO:
 
-
   Copyright (c) 2017-present Justin Haaheim
 
   This file is subject to the terms and conditions defined in
@@ -16,7 +15,7 @@
 
 ********************************************** */
 
-import { observable, computed, action, autorun, toJS } from 'mobx';
+import { observable, computed, action, toJS } from 'mobx';
 
 let nextTodoId = 0;
 
@@ -31,16 +30,16 @@ class TodoNode {
   // @observable depth;  // set only when the tree is returned for display.
 
   @computed get isRoot() {
-    return ('undefined' === typeof toJS(this.parent));
+    return (typeof toJS(this.parent) === 'undefined');
   }
 
   // the index of this node in its parent array
   @computed get index() {
     if (this.isRoot) {
-      return undefined
+      return undefined;
     }
     // is there any advantage to doing (n === this) versus (n.id === this.id) ?
-    const result = this.parent.children.findIndex((node) => node === this);
+    const result = this.parent.children.findIndex(node => node === this);
     return result;
   }
 
@@ -49,8 +48,7 @@ class TodoNode {
     if (this.index === 0) {
       return undefined;
     }
-
-    return this.parent.children[this.index-1];
+    return this.parent.children[this.index - 1];
   }
 
   // do I need @computed get depth() ??
@@ -59,7 +57,7 @@ class TodoNode {
     let d = 0;
     while (!n.isRoot) {
       n = n.parent;
-      d = d + 1;
+      d += 1;
     }
     return d;
   }
@@ -68,13 +66,14 @@ class TodoNode {
   @action.bound
   setStatus(newStatus) {
     this.completed = newStatus;
-    for (let c of this.children) {
+    for (const c of this.children) {
       c.setStatus(newStatus);
     }
   }
 
   @action.bound
   toggle() {
+    let nextHigherNode;
     this.setStatus(!this.completed);
 
     // if we're marking uncompleted trace up the tree to all consecutive
@@ -82,12 +81,11 @@ class TodoNode {
     // this is to prevent the scenario where you have uncompleted items
     // underneath a parent item that is complete.
     if (this.completed === false) {
-      var nextHigherNode = this.parent;
+      nextHigherNode = this.parent;
 
       while (
         nextHigherNode.completed === true
-        && !nextHigherNode.isRoot )
-      {
+        && !nextHigherNode.isRoot) {
         nextHigherNode.completed = false;
         nextHigherNode = nextHigherNode.parent;
       }
@@ -140,22 +138,23 @@ class TodoNode {
     }
     const a = this.parent.children;
     const i = this.index;
-    [ a[i-1], a[i] ] = [ this, a[i-1] ];
+    [a[i - 1], a[i]] = [this, a[i - 1]];
   }
 
   @action.bound
   moveDown() {
-    if (this.index >= this.parent.children.length-1) {
+    if (this.index >= this.parent.children.length - 1) {
       return;
     }
     const a = this.parent.children;
     const i = this.index;
-    [ a[i+1], a[i] ] = [ this, a[i+1] ];
+    [a[i + 1], a[i]] = [this, a[i + 1]];
   }
 
   constructor(parent = undefined, text = '') {
     this.text = text;
-    this.id = nextTodoId++;
+    this.id = nextTodoId;
+    nextTodoId += 1;
     this.completed = false;
     this.parent = parent;
   }

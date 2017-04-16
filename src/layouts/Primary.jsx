@@ -1,4 +1,4 @@
-/************************************************
+/**
 
   Name: /src/layouts/Primary.js
 
@@ -22,8 +22,7 @@ import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 
 import Footer from '../components/Footer';
-import AddTodo from '../containers/AddTodo';
-// import VisibleTodoList from '../containers/VisibleTodoList';
+import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 
 
@@ -31,47 +30,46 @@ const styles = {
   container: {
     textAlign: 'left',
     padding: 0,
-    height: '100%',
+//    height: '100%',
   },
   paper: {
     display: 'flex',
-    flex: 1,
+    alignItems: 'stretch',
     flexDirection: 'column',
     position: 'relative',
     margin: 20,
     marginBottom: 200,
     height: '100%',
+    minWidth: '460px',
     maxWidth: '800px',
-    minHeight: '540px',
+    minHeight: '510px',
   },
   contentBody: {
-    position: 'relative',
-    height: '100%',
-//    flex: 2,
-    flexGrow: 2,
+    minHeight: '510px',
+  },
+  todoList: {
+
   },
   footerArea: {
     padding: 0,
-    position: 'relative',
     bottom: '0px',
     left: '0px',
     right: '0px',
+    width: '100%',
   },
   addButton: {
     textAlign: 'right',
-    position: 'absolute',
-    bottom: '55px',
-    right: '55px',
-    margin: '10px',
-    marginRight: '25px',
-  }
+    bottom: '0px',
+    right: '0px',
+    margin: '40px',
+    marginRight: '50px',
+  },
 };
 
 
 @observer class Primary extends React.Component {
 
   render() {
-
     return (
       <div style={styles.container}>
         <Paper style={styles.paper} zDepth={4}>
@@ -81,12 +79,12 @@ const styles = {
               iconClassNameRight="muidocs-icon-navigation-expand-more"
             />
             <Subheader>Created with love by Justin Haaheim</Subheader>
-            <TodoList store={this.props.store} />
+            <TodoList store={this.props.store} style={styles.todoList} />
+          </div>
+          <div style={styles.footerArea}>
             <div style={styles.addButton}>
               <AddTodo store={this.props.store} />
             </div>
-          </div>
-          <div style={styles.footerArea}>
             <Footer store={this.props.store} />
           </div>
         </Paper>
@@ -96,9 +94,3 @@ const styles = {
 }
 
 export default Primary;
-
-// const muiTheme = getMuiTheme({
-//   palette: {
-//     accent1Color: deepOrange500,
-//   },
-// });

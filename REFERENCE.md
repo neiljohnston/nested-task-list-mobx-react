@@ -1,6 +1,18 @@
 Reference Information
 ===========
 
+# Building
+
+To build for production, run:
+
+```
+./node_modules/.bin/webpack --config webpack.config.js --progress --colors
+```
+
+There's currently still a bit more to do after that's done, including putting the bundle.js and index.html files in the right folders.
+
+TODO: write up a configuration to build/publish the project.
+
 # Project Plan
 
 ## Adding hierarchy to the task list
@@ -31,15 +43,6 @@ Taking inspiration from Google Tasks' functionality: https://mail.google.com/tas
 
 
 # Tools and guides
-
-## mobx-react-boilerplate
-https://github.com/mobxjs/mobx-react-boilerplate
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
 
 ## MobX
 https://github.com/mobxjs/mobx-react

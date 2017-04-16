@@ -1,4 +1,4 @@
-/************************************************
+/**
 
   Name: /src/index.jsx
 
@@ -18,22 +18,22 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'mobx-react';
 
-import TodoListStore from './stores/TodoListStore'; // already instantiated object
+import TodoListStoreInstance from './stores/TodoListStore'; // already instantiated object
 import App from './App';
 
 // Note: The Provider/inject method of passing the store isn't currently used.
 
-// For debugging
-window.TodoListStore = TodoListStore;
-window.todoRoot = TodoListStore.todoRoot;
+// // For debugging
+// window.TodoListStoreInstance = TodoListStoreInstance;
+// window.todoRoot = TodoListStoreInstance.todoRoot;
 
 render(
   <AppContainer>
-    <Provider store={TodoListStore}>
-      <App store={TodoListStore} />
+    <Provider store={TodoListStoreInstance}>
+      <App store={TodoListStoreInstance} />
     </Provider>
   </AppContainer>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 if (module.hot) {
@@ -42,11 +42,11 @@ if (module.hot) {
 
     render(
       <AppContainer>
-        <Provider store={TodoListStore}>
-          <NextApp store={TodoListStore} />
+        <Provider store={TodoListStoreInstance}>
+          <NextApp store={TodoListStoreInstance} />
         </Provider>
       </AppContainer>,
-      document.getElementById('root')
+      document.getElementById('root'),
     );
   });
 }
