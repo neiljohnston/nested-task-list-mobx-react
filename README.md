@@ -44,28 +44,28 @@ My intention in building this was to create the following:
 
 > A purely client-side (web only) implementation of hierarchical task-list interface, demonstrating good code design and organization.
 
-> Specifically: Design an elegant "blank sheet" UI (e.g., think Google Docs or simple Todo list app where people can just type freely) that enables vertically nested Tasks as indented bulleted lists. A Task can contain text (as the title) and nested Tasks.
+> Specifically: an elegant "blank sheet" UI (e.g., think Google Docs or simple Todo list app where people can just type freely) that enables vertically nested Tasks as indented bulleted lists. A Task can contain text (as the title) and nested Tasks.
 
 I chose to build this in React, using MobX to manage the application state and the react component library material-ui for basic ui functionality.
 
 **Why React?** - It's flexible, exceedingly powerful and well-suited to a project like this with with a simple core design but with lots to add in terms of functionality.
 
-**Why MobX?** - I actually started the project using Redux but found the design of actions -> reducers -> store to be burdensome. One of MobX's great features is its intuitive design & logic, and its simplicity. Create an observable TodoList store with observable TodoNodes. Check. ✓
+**Why MobX?** - I actually started the project using Redux but found the design of actions -> reducers -> store to be burdensome. One of MobX's great features is its intuitive design & logic, and its simplicity. Create an observable TodoListStore store with observable TodoNodes. Check. ✓
 
-**Why Material-UI** - The authors have done a fantastic job creating components that are visually attractive, precise and also functional. I knew it would be a great library to take me from 0-60mph.
+**Why Material-UI** - The authors have done a fantastic job creating components that are visually attractive, precise and also functional. I knew it would be a great library to get me up and running quickly.
 
 ## Project Structure
 
 For a project of this scale one of the primary considerations was keeping the design simple and understandable. Hence we have:
 
-- **Entry Point** - `src/index.jsx` and `src/App.jsx` provide the entry point to the App. `index` provides a hot reloading wrapper for dev, while App provides the material theme and access to the store.
+- **Entry Point** - `src/index.jsx` and `src/App.jsx` provide the entry point to the App. `index` provides a hot reloading wrapper for dev, while `App` provides the material theme and access to the store.
 - **Stores** - `src/stores/TodoListStore.js` and `src/stores/TodoNode.js` provide the state management and define the essential actions to manipulate the tree that represents the visual nested task list.
-- **Layouts** - `src/layouts/Primary.jsx` is currently the sole layout for the app, but this structure allows for other layouts in the future like menus/drawers, settings screens, etc.
+- **Layouts** - `src/layouts/Primary.jsx` is currently the sole layout (alternatively called a screen/scene/view depending on who you talk to) for the app, but this structure allows for other layouts in the future like menus/drawers, settings screens, etc.
 - **Components** - `src/components/TodoList.jsx`, `Todo.jsx`, `AddTodo.jsx`, and `Footer.jsx` are the React building block components for the app.
-  - I chose inline styling (of which there is fairly little) for simplicity, but a more robust styling arrangement could be easily put in place.
-  - Since the user interactions are almost all based on clicking, typing or keyboard shortcuts that pertain to one particular todo node, I put the main user interaction logic in `Todo.jsx`
+  - I chose inline styling (of which there is fairly little) for simplicity. If the app were to grow, a more robust styling arrangement could be easily put in place.
+  - Since the user interactions are almost all based on clicking, typing or keyboard shortcuts that pertain to one particular todo node, I put the main user interaction logic in `Todo.jsx`, which has worked great.
 
-Contributions are welcome! Feel free to send a pull request and/or to contact me as per below.
+Contributions are welcome! Feel free to send a pull request and/or contact me as per below.
 
 # License
 
