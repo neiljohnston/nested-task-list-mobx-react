@@ -48,7 +48,7 @@ import Todo from './Todo';
       () => { addTodo('You\'ll find it quite intuitive. Just type!'); },
       () => { addTodo('You can add a new item by pressing enter.').indent(); },
       () => {
-        const n = addTodo('Indent/unindent with tab/shift+tab.');
+        const n = addTodo('Move up/down using the arrows. Indent with tab/shift+tab.');
         n.indent();
         n.indent();
       },
@@ -56,30 +56,33 @@ import Todo from './Todo';
       () => { addTodo('Delete an empty line with backspace, or click the trashcan.'); },
       () => { addTodo('Enjoy!'); },
     ],
-    1500);
+    1000);
   }
 
 
   render() {
-    const { filteredTodos, addTodoAfter } = this.props.store;
+    const { filteredTodos, addTodoAfter, focusNode } = this.props.store;
 
     const items = filteredTodos.map((todo, index) => (
       <Todo
         key={todo.id}
         store={this.props.store}
-        node={todo}
-        depth={todo.depth}
-        completed={todo.completed}
-        text={todo.text}
-        arrayIndex={index}
-        toggle={todo.toggle}
-        deleteSelf={todo.delete}
         addAfter={() => addTodoAfter(todo)}
+        arrayIndex={index}
+        completed={todo.completed}
+        deleteSelf={todo.delete}
+        depth={todo.depth}
+        focusNode={focusNode}
+        getsFocus={todo.getsFocus}
+        id={todo.id}
         indent={todo.indent}
+        moveDown={todo.moveDown}
+        moveUp={todo.moveUp}
+        node={todo}
+        text={todo.text}
+        toggle={todo.toggle}
         unindent={todo.unindent}
         update={todo.update}
-        moveUp={todo.moveUp}
-        moveDown={todo.moveDown}
       />
     ));
 

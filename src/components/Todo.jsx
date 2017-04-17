@@ -38,20 +38,31 @@ const INDENT_SIZE = 25;
     this.textFieldRef.focus();
   }
 
+  componentDidUpdate() {
+    const { node } = this.props;
+    if (node.getsFocus) {
+      this.textFieldRef.focus();
+      node.getsFocus = false;
+    }
+  }
+
   render() {
     const {
-      toggle,
-      deleteSelf,
       addAfter,
-      indent,
-      unindent,
-      moveUp,
-      moveDown,
-      update,
-      depth,
       completed,
-      text,
+      deleteSelf,
+      depth,
+      focusNode,
+      getsFocus,
+      id,
+      indent,
+      moveDown,
+      moveUp,
       node,
+      text,
+      toggle,
+      unindent,
+      update,
     } = this.props;
 
     // the (non displaying) root node is depth 0. first non-indented level
@@ -77,6 +88,7 @@ const INDENT_SIZE = 25;
           if (text.length === 0) {
             e.preventDefault();
             if (e.type === 'keydown') {
+              focusNode(id, -1);
               deleteSelf();
             }
           }
@@ -101,6 +113,12 @@ const INDENT_SIZE = 25;
             if (e.type === 'keydown') {
               moveUp();
             }
+          } else {
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              // set focus on the previous node in the visible list.
+              focusNode(id, -1);
+            }
           }
           break;
         case 40:  // down arrow
@@ -108,6 +126,11 @@ const INDENT_SIZE = 25;
             e.preventDefault();
             if (e.type === 'keydown') {
               moveDown();
+            }
+          } else {
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              focusNode(id, 1);
             }
           }
           break;
@@ -157,7 +180,10 @@ const INDENT_SIZE = 25;
           }}
         />
         <IconButton
-          onTouchTap={deleteSelf}
+          onTouchTap={() => {
+            focusNode(id, -1);
+            deleteSelf();
+          }}
           tooltip="Delete Todo"
         >
           <FontIcon className="material-icons" style={iconStyles} >delete</FontIcon>

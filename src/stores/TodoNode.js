@@ -24,7 +24,8 @@ class TodoNode {
   // constitute the primary level of "Todos"
   @observable text;
   @observable id;
-  @observable completed;  // note the getter and setter functions below.
+  @observable completed;
+  @observable getsFocus = false;
   @observable parent;
   @observable children = [];
   // @observable depth;  // set only when the tree is returned for display.

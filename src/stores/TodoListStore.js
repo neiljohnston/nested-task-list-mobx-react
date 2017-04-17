@@ -87,6 +87,21 @@ export class TodoListStore {
     return node;
   }
 
+  // Sets focus on the node that is at location curNode + delta in the
+  // filtered (aka visible) list.
+  @action.bound
+  focusNode(curId, delta) {
+    const filteredList = this.filteredTodos;
+    const curIndex = filteredList.findIndex(n => n.id === curId);
+    if (curIndex === -1) {
+      return;
+    }
+    const newIndex = curIndex + delta;
+    if (0 <= newIndex && newIndex < filteredList.length) {
+      filteredList[newIndex].getsFocus = true;
+    }
+  }
+
   // May just use this for debugging.
   @action.bound
   addTodo(text = '') {
