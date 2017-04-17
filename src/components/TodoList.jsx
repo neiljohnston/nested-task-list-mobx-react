@@ -48,7 +48,7 @@ import Todo from './Todo';
       () => { addTodo('You\'ll find it quite intuitive. Just type!'); },
       () => { addTodo('You can add a new item by pressing enter.').indent(); },
       () => {
-        const n = addTodo('Move up/down the arrows. Indent with tab/shift+tab.');
+        const n = addTodo('Move up/down using the arrows. Indent with tab/shift+tab.');
         n.indent();
         n.indent();
       },
