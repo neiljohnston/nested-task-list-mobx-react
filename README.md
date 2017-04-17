@@ -56,6 +56,10 @@ I chose to build this in React, using MobX to manage the application state and t
 
 **Why Material-UI** - The authors have done a fantastic job creating components that are visually attractive, precise and also functional. I knew it would be a great library to get me up and running quickly.
 
+### Style
+
+This project uses the [Airbnb Javascript + React Style Guide](https://github.com/airbnb/javascript) for coding style, and is configured for linting using ESLint. 
+
 ## Project Structure
 
 For a project of this scale one of the primary considerations was keeping the design simple and understandable. Hence we have:
