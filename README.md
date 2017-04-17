@@ -18,11 +18,11 @@ Project created by [Justin Haaheim](https://github.com/justinhaaheim). See his o
 
 - **Hierarchical task structure** - easily define complex tasks and projects with simple indenting to nest tasks within tasks. When indenting/unindenting, the task list knows where to move your task so that it makes sense in terms of task relationships, and also produces a clear visual experience.
 - **Elegant interface** - Material Design interface with smooth ui transitions for indenting and visual touch feedback for clicks/taps on input fields and buttons.
-- **Intuitive UI** - tasks behave like lines in a text editor: use `enter` to create a new task, `backspace` on an empty task to delete it, `cmd+up` and `cmd+down` to move tasks up and down, `tab` and `shift+tab` to indent/nest tasks under one another. There is also a button to add tasks and a trash/recycle bin icon to delete.
+- **Intuitive UI** - tasks behave like lines in a text editor: use `enter` to create a new task, `backspace` on an empty task to delete it, `up` and `down` arrows to move focus up and down, `cmd+up` and `cmd+down` to move tasks up and down, `tab` and `shift+tab` to indent/nest tasks under one another. There is also a button to add tasks and a trash/recycle bin icon to delete.
 - **Smart task completion logic** - when a task is completed, all its sub-tasks are recursively completed. When a task is not-yet-complete, its parent tasks are marked not-yet-complete back to the root (ie when a project is completed its subtasks are as well).
 - **Filter completed tasks** - ability to show all tasks (completed and not), active tasks (incomplete), or completed tasks.
 
-# How to run in dev mode
+# Install / Run in dev mode
 
 From the root of the project directory:
 
