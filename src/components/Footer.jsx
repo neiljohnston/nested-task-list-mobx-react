@@ -24,6 +24,7 @@ import { pinkA200, grey100, grey500, grey700, red200, red100, red500,
 const showAllIcon = <FontIcon className="material-icons">description</FontIcon>;
 const showActiveIcon = <FontIcon className="material-icons">flip_to_front</FontIcon>;
 const showCompletedIcon = <FontIcon className="material-icons">done_all</FontIcon>;
+const clearAllIcon = <FontIcon className="material-icons">clear_all</FontIcon>;
 
 
 @observer class Footer extends React.Component {
@@ -59,6 +60,13 @@ const showCompletedIcon = <FontIcon className="material-icons">done_all</FontIco
         <BottomNavigationItem
           label="Show Completed"
           icon={showCompletedIcon}
+          onTouchTap={() =>
+              store.visibilityFilter = 'SHOW_COMPLETED'
+            }
+        />
+        <BottomNavigationItem
+          label="Clear All"
+          icon={clearAllIcon}
           onTouchTap={() =>
               store.visibilityFilter = 'SHOW_COMPLETED'
             }

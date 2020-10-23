@@ -23,12 +23,11 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import { ListItem } from 'material-ui/List';
 
-
 const iconStyles = {
   margin: 5,
 };
 
-const INDENT_SIZE = 25;
+const INDENT_SIZE = 32;
 
 
 @observer class Todo extends React.Component {
@@ -67,14 +66,14 @@ const INDENT_SIZE = 25;
 
     // the (non displaying) root node is depth 0. first non-indented level
     // is at depth 1.
-    const marginLeft = `${(depth - 1) * INDENT_SIZE}pt`;
+    const paddingLeft = `${(depth - 1) * INDENT_SIZE}pt`;
 
     // It's important for the interface to function correctly to handle
     // both keydown and keyup. In the case of tab, for example, if you just
     // handle keydown, keyup will still cause the browser to advance focus
     // to the next element.
     const handleKeyPress = (e) => {
-      // console.log('Text field keyUp key: ', e.which);
+      console.log('Text field keyUp key: ', e.which);
       switch (e.which) {
         case 13:  // enter
           e.preventDefault();
@@ -93,20 +92,36 @@ const INDENT_SIZE = 25;
             }
           }
           break;
-        case 9:
-          if (!e.shiftKey) {  // tab
-            e.preventDefault();
-            if (e.type === 'keydown') {
-              indent();
-            }
-            break;
-          } else {  // shift+tab
+        // case 9:
+        //   if (!e.shiftKey) {  // tab
+        //     e.preventDefault();
+        //     if (e.type === 'keydown') {
+        //       indent();
+        //     }
+        //     break;
+        //   } else {  // shift+tab
+        //     e.preventDefault();
+        //     if (e.type === 'keydown') {
+        //       unindent();
+        //     }
+        //     break;
+        //   }
+        case 37:  // left arrow
+          if (e.metaKey) {  // Cmd+up / Meta+up
             e.preventDefault();
             if (e.type === 'keydown') {
               unindent();
             }
-            break;
           }
+          break;
+        case 39:  // right arrow
+          if (e.metaKey) {  // Cmd+up / Meta+up
+            e.preventDefault();
+            if (e.type === 'keydown') {
+              indent();
+            }
+          }
+          break;
         case 38:  // up arrow
           if (e.metaKey) {  // Cmd+up / Meta+up
             e.preventDefault();
@@ -147,8 +162,9 @@ const INDENT_SIZE = 25;
           flexWrap: 'nowrap',
           padding: '3px',
           alignItems: 'center',
-          marginLeft,
+          paddingLeft,
         }}
+        className ={`row depth-${depth} ${node.id}`}
       >
         <Checkbox
           name=""
@@ -159,7 +175,7 @@ const INDENT_SIZE = 25;
             display: 'inline-block',
             width: '',
             margin: '0',
-            marginLeft: 10,
+            paddingLeft: 16,
             verticalAlign: 'center',
           }}
         />
@@ -178,15 +194,17 @@ const INDENT_SIZE = 25;
             display: 'inline-block',
             flexGrow: 2,
           }}
+          className ={`depth-${depth}`}
         />
         <IconButton
+          className="button-icon"
           onTouchTap={() => {
             focusNode(id, -1);
             deleteSelf();
           }}
-          tooltip="Delete Todo"
+          tooltip="Delete Item"
         >
-          <FontIcon className="material-icons" style={iconStyles} >delete</FontIcon>
+          <FontIcon className="material-icons delete-icon" style={iconStyles} >delete</FontIcon>
         </IconButton>
       </ListItem>
     );

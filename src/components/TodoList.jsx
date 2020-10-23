@@ -44,19 +44,12 @@ import Todo from './Todo';
     const { addTodo } = this.props.store;
 
     setTimeouts([
-      () => { addTodo('Welcome to this nested task list!'); },
-      () => { addTodo('You\'ll find it quite intuitive. Just type!'); },
-      () => { addTodo('You can add a new item by pressing enter.').indent(); },
-      () => {
-        const n = addTodo('Move up/down using the arrows. Indent with tab/shift+tab.');
-        n.indent();
-        n.indent();
-      },
-      () => { addTodo('Move an item up/down with cmd+up/cmd+down.').indent(); },
-      () => { addTodo('Delete an empty line with backspace, or click the trashcan.'); },
-      () => { addTodo('Enjoy!'); },
+      () => { addTodo('Kick-Off'); },
+      () => { addTodo('Testing'); },
+      () => { addTodo('Add Task').indent(); },
+      () => { addTodo('Summary'); },
     ],
-    1000);
+    250);
   }
 
 

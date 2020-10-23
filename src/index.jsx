@@ -20,12 +20,15 @@ import { Provider } from 'mobx-react';
 
 import TodoListStoreInstance from './stores/TodoListStore'; // already instantiated object
 import App from './App';
+// import './index.scss';
+
 
 // Note: The Provider/inject method of passing the store isn't currently used.
 
 // // For debugging
 // window.TodoListStoreInstance = TodoListStoreInstance;
 // window.todoRoot = TodoListStoreInstance.todoRoot;
+
 
 render(
   <AppContainer>
