@@ -85,8 +85,8 @@ const styles = {
               <ul>
                 <li>You can add a new item by pressing enter. </li>
                 <li>Move up/down using the arrows. </li>
-                <li>Shift a item from Phase to Task to Subtask, with cmd+left/cmd+right arrow keys.</li>
-                <li>Move an item up/down with cmd+up/cmd+down.</li>
+                <li>Shift a item from Phase to Task to Subtask, with windows/cmd+left or windows/cmd+right arrow keys.</li>
+                <li>Move an item up/down with windows/cmd+up or windows/cmd+down.</li>
                 <li>Delete an empty line with backspace, or click the trashcan.</li>
               </ul>
             </Card>
